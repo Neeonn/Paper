@@ -1,0 +1,21 @@
+From f33c8c55497a2101d9559f2f382522df3cf3ad59 Mon Sep 17 00:00:00 2001
+From: neon <srdjanneon@gmail.com>
+Date: Sun, 14 Mar 2021 02:31:36 +0100
+Subject: [PATCH] [FlamePaper] Do not load chunks for light checks
+
+
+diff --git a/src/main/java/net/minecraft/server/World.java b/src/main/java/net/minecraft/server/World.java
+index ec322e52..14430245 100644
+--- a/src/main/java/net/minecraft/server/World.java
++++ b/src/main/java/net/minecraft/server/World.java
+@@ -685,6 +685,7 @@ public abstract class World implements IBlockAccess {
+                 if (blockposition.getY() >= 256) {
+                     blockposition = new BlockPosition(blockposition.getX(), 255, blockposition.getZ());
+                 }
++                if (!this.isLoaded(blockposition)) return 0; // Paper
+ 
+                 Chunk chunk = this.getChunkAtWorldCoords(blockposition);
+ 
+-- 
+2.30.2
+
