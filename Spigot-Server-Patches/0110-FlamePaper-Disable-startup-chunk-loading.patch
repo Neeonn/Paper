@@ -1,0 +1,31 @@
+From 653d13bf2c76ded27aab59726850c1e0991f52af Mon Sep 17 00:00:00 2001
+From: neon <srdjanneon@gmail.com>
+Date: Sun, 14 Mar 2021 02:41:38 +0100
+Subject: [PATCH] [FlamePaper] Disable startup chunk loading
+
+
+diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
+index e779442b..fb94f9f5 100644
+--- a/src/main/java/net/minecraft/server/MinecraftServer.java
++++ b/src/main/java/net/minecraft/server/MinecraftServer.java
+@@ -350,7 +350,7 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
+             long j = az();
+             i = 0;
+ 
+-            for (int k = -192; k <= 192 && this.isRunning(); k += 16) {
++            /*for (int k = -192; k <= 192 && this.isRunning(); k += 16) {
+                 for (int l = -192; l <= 192 && this.isRunning(); l += 16) {
+                     long i1 = az();
+ 
+@@ -362,7 +362,7 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
+                     ++i;
+                     worldserver.chunkProviderServer.getChunkAt(blockposition.getX() + k >> 4, blockposition.getZ() + l >> 4);
+                 }
+-            }
++            }*/
+         }
+ 
+         for (WorldServer world : this.worlds) {
+-- 
+2.30.2
+
