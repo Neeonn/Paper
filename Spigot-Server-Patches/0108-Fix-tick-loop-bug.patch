@@ -1,0 +1,39 @@
+From 9542c04180a26ca5972cbcd2b5bc07c7ff2d901b Mon Sep 17 00:00:00 2001
+From: neon <srdjanneon@gmail.com>
+Date: Sun, 14 Mar 2021 02:33:15 +0100
+Subject: [PATCH] Fix tick loop bug
+
+
+diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
+index b400ce04d..e779442b3 100644
+--- a/src/main/java/net/minecraft/server/MinecraftServer.java
++++ b/src/main/java/net/minecraft/server/MinecraftServer.java
+@@ -579,19 +579,21 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
+                     // PaperSpigot start - Further improve tick loop
+                     wait = TICK_TIME - (curTime - lastTick);
+                     if (wait > 0) {
++                        // TacoSpigot start - fix the tick loop improvements
+                         if (catchupTime < 2E6) {
+                             wait += Math.abs(catchupTime);
+-                        }
+-                        if (wait < catchupTime) {
++                        } else if (wait < catchupTime) {
+                             catchupTime -= wait;
+                             wait = 0;
+-                        } else if (catchupTime > 2E6) {
++                        } else {
+                             wait -= catchupTime;
+-                            catchupTime -= catchupTime;
++                            catchupTime = 0;
+                         }
++                        // TacoSpigot end
+                     }
+                     if (wait > 0) {
+                         Thread.sleep(wait / 1000000);
++                        curTime = System.nanoTime();
+                         wait = TICK_TIME - (curTime - lastTick);
+                     }
+ 
+-- 
+2.30.2
+

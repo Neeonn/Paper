@@ -1,0 +1,21 @@
+From 4b1d6e1101f799c6ccd96b6af3a512d9624242f0 Mon Sep 17 00:00:00 2001
+From: neon <srdjanneon@gmail.com>
+Date: Sun, 14 Mar 2021 02:31:36 +0100
+Subject: [PATCH] Do not load chunks for light checks
+
+
+diff --git a/src/main/java/net/minecraft/server/World.java b/src/main/java/net/minecraft/server/World.java
+index ec322e521..144302458 100644
+--- a/src/main/java/net/minecraft/server/World.java
++++ b/src/main/java/net/minecraft/server/World.java
+@@ -685,6 +685,7 @@ public abstract class World implements IBlockAccess {
+                 if (blockposition.getY() >= 256) {
+                     blockposition = new BlockPosition(blockposition.getX(), 255, blockposition.getZ());
+                 }
++                if (!this.isLoaded(blockposition)) return 0; // Paper
+ 
+                 Chunk chunk = this.getChunkAtWorldCoords(blockposition);
+ 
+-- 
+2.30.2
+
