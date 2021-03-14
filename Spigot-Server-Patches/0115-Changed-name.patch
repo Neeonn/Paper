@@ -1,0 +1,21 @@
+From 6ca74cb1fcdc6ec5cd1e3af2ba5b1c1ebe4cdca7 Mon Sep 17 00:00:00 2001
+From: neon <srdjanneon@gmail.com>
+Date: Sun, 14 Mar 2021 04:16:07 +0100
+Subject: [PATCH] Changed name
+
+
+diff --git a/pom.xml b/pom.xml
+index 23d584d2a..99dc672a2 100644
+--- a/pom.xml
++++ b/pom.xml
+@@ -114,7 +114,6 @@
+             <version>1.3</version>
+             <configuration>
+                 <outputPrefix>git-DivinePaper-</outputPrefix>
+-                <!--<outputPrefix>git-PaperSpigot-</outputPrefix>-->
+                 <scmDirectory>..</scmDirectory>
+             </configuration>
+             <executions>
+-- 
+2.30.2
+
